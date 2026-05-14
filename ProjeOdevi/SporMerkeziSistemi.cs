@@ -153,13 +153,13 @@ namespace ProjeOdevi
         {
             if (Rezervasyonlar.Count == 0)
             {
-                Console.WriteLine("Henüz randevu bulunmamaktadır.");
+                Console.WriteLine("Henüz rezervasyon bulunmamaktadır.");
                 Console.ReadLine();
                 return;
             }
             foreach (var r in Rezervasyonlar)
             {
-                Console.WriteLine($"Randevu No: {r.Id} | " +
+                Console.WriteLine($"Rezervasyon No: {r.Id} | " +
                     $"Kullanıcı: {r.Kullanici.Ad} | " +
                     $"Saha: {r.Saha.Ad} | " +
                     $"Tarih: {r.RezervasyonTarihi:dd.MM.yyyy HH:mm}");
@@ -186,6 +186,8 @@ namespace ProjeOdevi
             RezervasyonListele();
             try
             {
+                Console.Write("E-mail: ");
+                string email = Console.ReadLine();
                 Console.Write("Güncellenecek Rezervasyon No: ");
                 if (!int.TryParse(Console.ReadLine(), out int no))
                 {
@@ -193,10 +195,10 @@ namespace ProjeOdevi
                     return;
                 }
                
-                Rezervasyon guncellenecekRezervasyon = Rezervasyonlar.FirstOrDefault(r => r.Id == no);
+                Rezervasyon guncellenecekRezervasyon = Rezervasyonlar.FirstOrDefault(r => r.Id == no && r.Kullanici.Email == email);
                 if (guncellenecekRezervasyon == null)
                 {
-                    Console.WriteLine("Rezervasyon bulunamadı!");
+                    Console.WriteLine("Rezervasyon bulunamadı veya bilgiler yanlış!");
                     return;
                 }
                 Console.WriteLine("YENİ TARİH");
@@ -229,19 +231,22 @@ namespace ProjeOdevi
         {
             try
             {
+                Console.Write("E-mail: ");
+                string email = Console.ReadLine();
                 Console.Write("Silinecek rezervasyon ID: ");
-                if(!int.TryParse(Console.ReadLine(),out int id))
+                if (!int.TryParse(Console.ReadLine(), out int id))
                 {
                     Console.WriteLine("Geçersiz ID!");
                     return;
                 }
-                Rezervasyon rez = Rezervasyonlar.FirstOrDefault(r => r.Id == id);
+                Rezervasyon rez = Rezervasyonlar.FirstOrDefault(r => r.Id == id && r.Kullanici.Email==email);
 
                 if (rez == null)
                 {
-                    Console.WriteLine("Rezervasyon bulunamadı!");
+                    Console.WriteLine("Rezervasyon bulunamadı veya bilgiler yanlış!");
                     return;
                 }
+               
                 Rezervasyonlar.Remove(rez);
                 DosyayaKaydet();
                 Console.WriteLine("Rezervasyon başarıyla silindi!");

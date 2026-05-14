@@ -18,8 +18,7 @@ namespace ProjeOdevi
 
     public class FutbolSahasi : Saha
     {
-        public bool CimMİ { get; set; } = true;
-
+   
         public override string SahaBilgisi()
         {
             return base.SahaBilgisi()+ "| Tür: Futbol";
@@ -28,8 +27,6 @@ namespace ProjeOdevi
 
     public class BasketbolSahasi : Saha
     {
-        public bool KapaliAlanMi { get; set; } = true;
-
         public override string SahaBilgisi()
         {
             return base.SahaBilgisi() + " | Tür: Basketbol";
@@ -37,8 +34,6 @@ namespace ProjeOdevi
     }
     public class VoleybolSahasi : Saha
     {
-        public bool KumZeminMi { get; set; } = true;
-
         public override string SahaBilgisi()
         {
             return base.SahaBilgisi() + " | Tür: Voleybol";
@@ -47,7 +42,6 @@ namespace ProjeOdevi
 
     public class TenisKortu : Saha
     {
-        public bool KapaliAlanMi { get; set; } = false;
         public override string SahaBilgisi()
         {
             return base.SahaBilgisi() + " | Tür: Tenis";
